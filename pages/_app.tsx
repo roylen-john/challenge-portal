@@ -5,11 +5,12 @@ import Head from 'next/head'
 import { classNames } from '../utils/utils'
 
 import '../styles/globals.css'
+import Navbar from '../components/navbar/Navbar'
 
 function MyApp({ Component, pageProps }: AppProps): ReactFragment {
-  const [lightTheme] = useState(true)
+  const [lightTheme, setLightTheme] = useState(false)
 
-  // const handleThemeChange = () => setLightTheme(!lightTheme)
+  const handleThemeChange = () => setLightTheme(!lightTheme)
 
   return (
     <>
@@ -24,6 +25,14 @@ function MyApp({ Component, pageProps }: AppProps): ReactFragment {
           lightTheme ? 'theme-light' : 'theme-dark'
         )}
       >
+        <Navbar
+          navItems={[
+            { name: 'All Challenges', href: '/' },
+            { name: 'New Challenge', href: '/new-challenge' },
+          ]}
+          onThemeChange={handleThemeChange}
+        />
+        <div className="h-16" />
         <Component {...pageProps} />
       </div>
     </>
