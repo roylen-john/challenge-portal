@@ -1,10 +1,10 @@
 import React from 'react'
-import { render, within } from '@testing-library/react'
+import { cleanup, render, within } from '@testing-library/react'
 import { screen } from '@testing-library/dom'
 
-import Navbar, { Props } from './Navbar'
+import Navbar, { iNavbarProps } from './Navbar'
 
-const DEFAULT_PROPS: Props = {
+const DEFAULT_PROPS: iNavbarProps = {
   navItems: [],
   onThemeChange: jest.fn(),
 }
@@ -21,6 +21,8 @@ jest.mock('next/router', () => ({
 }))
 
 describe('Navbar', () => {
+  afterEach(cleanup)
+
   test('renders correctly', () => {
     const { asFragment } = render(<Navbar {...DEFAULT_PROPS} />)
     expect(asFragment()).toMatchSnapshot()

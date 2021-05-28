@@ -11,12 +11,12 @@ interface navItem {
   href: string
 }
 
-export interface Props {
+export interface iNavbarProps {
   navItems: navItem[]
   onThemeChange: () => void
 }
 
-function Navbar({ navItems }: Props): ReactElement {
+function Navbar({ navItems }: iNavbarProps): ReactElement {
   const router = useRouter()
 
   return (

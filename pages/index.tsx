@@ -1,3 +1,3 @@
-export const Home = (): JSX.Element => <div>All challenges</div>
+export const Home = (): JSX.Element => <div>Login</div>
 
 export default Home
