@@ -14,6 +14,7 @@ const port = 8000
 
 const server = jsonServer.create()
 const router = jsonServer.router('./database.json')
+const userRouter = jsonServer.router('./users.json')
 let userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 
 server.use(bodyParser.urlencoded({ extended: true }))
@@ -155,7 +156,8 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
   }
 })
 
-server.use(router)
+server.use('/auth', userRouter)
+server.use('/mock', router)
 
 server.listen(port, () => {
   console.log(`Mock JSON Server listening on port ${port}`)
