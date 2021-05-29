@@ -17,8 +17,8 @@
     "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "lint-staged": {
-    "*.@(ts|tsx)": [
-      "npm run lint",
+    "*.(ts|tsx)": [
+      "eslint",
       "npm run format"
     ]
   },
@@ -28,7 +28,8 @@
     "@tailwindcss/typography": "^0.4.1",
     "next": "latest",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-hook-form": "^7.7.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.12.0",
