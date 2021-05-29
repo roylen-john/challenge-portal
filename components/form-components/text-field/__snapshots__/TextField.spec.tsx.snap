@@ -3,7 +3,7 @@
 exports[`Textfield renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="w-full"
+    class=""
   >
     <label
       class="block text-gray-700 text-sm font-bold mb-2"
