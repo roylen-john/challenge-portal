@@ -3,28 +3,30 @@ import TextField from '../components/form-components/text-field/TextField'
 
 import { Controller, useForm } from 'react-hook-form'
 import Button from '../components/form-components/button/Button'
-import { LoginIcon } from '@heroicons/react/outline'
-import { DotsCircleHorizontalIcon } from '@heroicons/react/outline'
+import { DotsCircleHorizontalIcon, UserAddIcon } from '@heroicons/react/outline'
 import { useAuth } from '../context/auth/AuthContext'
 import Link from 'next/link'
 
 interface ILoginFormValues {
+  name: string
   emp_id: string
   password: string
+  rePassword: string
 }
 
 function Home(): ReactElement {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<ILoginFormValues>()
-  const { login } = useAuth()
+  const { register } = useAuth()
   const [submitting, setSubmitting] = useState(false)
 
   const onSubmit = (data) => {
     setSubmitting(true)
-    login(data)
+    register(data)
       .then(() => setSubmitting(false))
       .catch(() => setSubmitting(false))
   }
@@ -36,6 +38,26 @@ function Home(): ReactElement {
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
+          <div className="mb-4">
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: true }}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  type="text"
+                  label="Name"
+                  placeholder="Name"
+                  error={!!errors.name}
+                  helperText={
+                    errors.name?.type === 'required' && 'Name is required'
+                  }
+                  {...field}
+                />
+              )}
+            />
+          </div>
           <div className="mb-4">
             <Controller
               name="emp_id"
@@ -57,11 +79,14 @@ function Home(): ReactElement {
               )}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <Controller
               name="password"
               control={control}
-              rules={{ required: true }}
+              rules={{
+                required: true,
+                pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+              }}
               defaultValue=""
               render={({ field }) => (
                 <TextField
@@ -70,8 +95,36 @@ function Home(): ReactElement {
                   placeholder="Password"
                   error={!!errors.password}
                   helperText={
-                    errors.password?.type === 'required' &&
-                    'Password is required'
+                    (errors.password?.type === 'required' &&
+                      'Password is required') ||
+                    (errors.password?.type === 'pattern' &&
+                      'Password must contain minimum eight characters, at least one letter and one number')
+                  }
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-6">
+            <Controller
+              name="rePassword"
+              control={control}
+              rules={{
+                required: true,
+                validate: (value) => value === watch('password'),
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  type="password"
+                  label="Re-enter Password"
+                  placeholder="Password"
+                  error={!!errors.rePassword}
+                  helperText={
+                    (errors.rePassword?.type === 'required' &&
+                      'Password is required') ||
+                    (errors.rePassword?.type === 'validate' &&
+                      'Passwords do not match')
                   }
                   {...field}
                 />
@@ -87,16 +140,16 @@ function Home(): ReactElement {
                 submitting ? (
                   <DotsCircleHorizontalIcon className="h-6 w-6 absolute" />
                 ) : (
-                  <LoginIcon className="h-6 w-6 absolute" />
+                  <UserAddIcon className="h-6 w-6 absolute" />
                 )
               }
               disabled={submitting}
             >
-              Sign In
+              Sign Up
             </Button>
-            <Link href="/register">
+            <Link href="/">
               <a className="inline-block align-baseline font-bold text-sm mt-5 text-blue-500 hover:text-blue-800">
-                Not registered? Sign Up
+                Already registered? Sign in
               </a>
             </Link>
           </div>

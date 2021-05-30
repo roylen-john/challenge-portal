@@ -21,12 +21,16 @@ interface iUser {
 interface iAuthContext {
   user: iUser
   login: (user) => Promise<void>
+  register: (user) => Promise<void>
   logout: () => void
 }
 
 const authContextDefaultValues: iAuthContext = {
   user: null,
   login: async () => {
+    /* Do Nothing */
+  },
+  register: async () => {
     /* Do Nothing */
   },
   logout: () => {
@@ -63,6 +67,21 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
       })
   }
 
+  const register = async (user) => {
+    return await apiClient()
+      .post(clientApiRoutes.REGISTER, user)
+      .then((response) => {
+        const token = response.data.access_token
+        localStorage.setItem('accessToken', token)
+        const user = jwt_decode<iUser>(token)
+        setUser(user)
+        router.push(routes.ALL_CHALLENGES)
+      })
+      .catch((err) => {
+        toast(err.response.data.message, { type: 'error' })
+      })
+  }
+
   const logout = () => {
     setUser(null)
     localStorage.removeItem('accessToken')
@@ -72,6 +91,7 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
   const value = {
     user,
     login,
+    register,
     logout,
   }
 

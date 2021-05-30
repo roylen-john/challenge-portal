@@ -1,5 +1,10 @@
 {
   "users": [
-    { "id": 1, "emp_id": "101010", "password": "test", "name": "Test User" }
+    {
+      "id": 1,
+      "emp_id": "101010",
+      "password": "1qwertyui",
+      "name": "Test User 1"
+    }
   ]
 }
