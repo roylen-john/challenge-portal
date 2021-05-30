@@ -24,4 +24,9 @@ const apiClient = (): AxiosInstance => {
   return instance
 }
 
-export { classNames, apiClient }
+const swrFetcher = (url: string): Promise<any> =>
+  apiClient()
+    .get(url)
+    .then((res) => res.data)
+
+export { classNames, apiClient, swrFetcher }

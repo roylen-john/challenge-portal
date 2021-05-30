@@ -51,11 +51,15 @@ export function AppLayout({ children }: iLayoutProps): ReactElement {
       >
         <Navbar
           navItems={[
-            { name: 'All Challenges', href: routes.ALL_CHALLENGES },
+            {
+              name: 'All Challenges',
+              href: { pathname: routes.ALL_CHALLENGES, query: { page: 1 } },
+            },
             { name: 'New Challenge', href: routes.NEW_CHALLENGE },
           ]}
           onThemeChange={handleThemeChange}
         />
+        <div className="h-16" />
         <div className="h-full flex-grow px-10 py-4">{children}</div>
       </div>
     </>

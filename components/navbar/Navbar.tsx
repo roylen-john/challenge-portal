@@ -6,10 +6,11 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { classNames } from '../../utils/utils'
 import Logo from '../logo/Logo'
 import { useAuth } from '../../context/auth/AuthContext'
+import { UrlObject } from 'url'
 
 interface navItem {
   name: string
-  href: string
+  href?: UrlObject | string
 }
 
 export interface iNavbarProps {
@@ -24,7 +25,7 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
   return (
     <Disclosure
       as="nav"
-      className="bg-neutralBg w-full border-b border-gray-700"
+      className="bg-neutralBg fixed w-full border-b border-gray-700"
     >
       {({ open }) => (
         <>
@@ -46,7 +47,9 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                         <Link href={item.href}>
                           <a
                             className={classNames(
-                              router.pathname === item.href
+                              router.pathname === item.href ||
+                                router.pathname ===
+                                  (item.href as UrlObject).pathname
                                 ? 'transition duration-200 ease-out bg-primaryBold text-white'
                                 : 'transition duration-200 ease-out text-contrastNeutralBgSoft hover:bg-primarySoft hover:text-white',
                               'px-3 py-2 rounded text-sm font-medium'

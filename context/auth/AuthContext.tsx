@@ -26,9 +26,7 @@ interface iAuthContext {
 }
 
 const authContextDefaultValues: iAuthContext = {
-  user: localStorage.getItem('accessToken')
-    ? jwt_decode<iUser>(localStorage.getItem('accessToken'))
-    : null,
+  user: null,
   login: async () => {
     /* Do Nothing */
   },
@@ -51,7 +49,11 @@ interface iAuthProviderProps {
 }
 
 export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
-  const [user, setUser] = useState<iUser>(null)
+  const [user, setUser] = useState<iUser>(
+    typeof window !== 'undefined' && localStorage.getItem('accessToken')
+      ? jwt_decode<iUser>(localStorage.getItem('accessToken'))
+      : null
+  )
   const router = useRouter()
 
   const login = async (user) => {
@@ -62,7 +64,7 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
         localStorage.setItem('accessToken', token)
         const user = jwt_decode<iUser>(token)
         setUser(user)
-        router.push(routes.ALL_CHALLENGES)
+        router.push({ pathname: routes.ALL_CHALLENGES, query: { page: 1 } })
       })
       .catch((err) => {
         toast(err.response.data.message, { type: 'error' })
@@ -77,7 +79,7 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
         localStorage.setItem('accessToken', token)
         const user = jwt_decode<iUser>(token)
         setUser(user)
-        router.push(routes.ALL_CHALLENGES)
+        router.push({ pathname: routes.ALL_CHALLENGES, query: { page: 1 } })
       })
       .catch((err) => {
         toast(err.response.data.message, { type: 'error' })
