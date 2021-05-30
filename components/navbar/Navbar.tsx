@@ -22,7 +22,10 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
   const { user, logout } = useAuth()
 
   return (
-    <Disclosure as="nav" className="bg-neutralBgSoft w-full fixed">
+    <Disclosure
+      as="nav"
+      className="bg-neutralBg w-full border-b border-gray-700"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-6 lg:px-8">

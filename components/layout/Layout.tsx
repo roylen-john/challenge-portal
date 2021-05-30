@@ -44,9 +44,7 @@ export function AppLayout({ children }: iLayoutProps): ReactElement {
       </Head>
       <div
         className={classNames(
-          'w-full',
-          'min-h-screen',
-          'bg-neutralBg',
+          'w-full min-h-screen bg-neutralBg flex flex-col',
           lightTheme ? 'theme-light' : 'theme-dark'
         )}
         data-testid="app-layout"
@@ -58,8 +56,7 @@ export function AppLayout({ children }: iLayoutProps): ReactElement {
           ]}
           onThemeChange={handleThemeChange}
         />
-        <div className="h-16" />
-        {children}
+        <div className="h-full flex-grow px-10 py-4">{children}</div>
       </div>
     </>
   )

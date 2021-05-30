@@ -14,7 +14,7 @@ interface ILoginFormValues {
   rePassword: string
 }
 
-function Home(): ReactElement {
+function Register(): ReactElement {
   const {
     control,
     handleSubmit,
@@ -159,4 +159,4 @@ function Home(): ReactElement {
   )
 }
 
-export default Home
+export default Register

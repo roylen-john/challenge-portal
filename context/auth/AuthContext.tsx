@@ -26,7 +26,9 @@ interface iAuthContext {
 }
 
 const authContextDefaultValues: iAuthContext = {
-  user: null,
+  user: localStorage.getItem('accessToken')
+    ? jwt_decode<iUser>(localStorage.getItem('accessToken'))
+    : null,
   login: async () => {
     /* Do Nothing */
   },

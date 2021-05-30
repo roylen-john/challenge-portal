@@ -13,7 +13,7 @@ interface ILoginFormValues {
   password: string
 }
 
-function Home(): ReactElement {
+function Login(): ReactElement {
   const {
     control,
     handleSubmit,
@@ -106,4 +106,4 @@ function Home(): ReactElement {
   )
 }
 
-export default Home
+export default Login
