@@ -16,6 +16,8 @@ export default async function handler(
           params: {
             _page: req.query._page,
             _limit: process.env.CHALLENGE_PAGE_LIMIT,
+            _sort: req.query._sort,
+            _order: req.query._order,
           },
         }
       )
@@ -24,10 +26,6 @@ export default async function handler(
         process.env.HOST + apiRoutes.GET_USERS,
         {
           headers: req.headers,
-          params: {
-            _page: req.query._page,
-            _limit: process.env.CHALLENGE_PAGE_LIMIT,
-          },
         }
       )
 
@@ -35,10 +33,6 @@ export default async function handler(
         process.env.HOST + apiRoutes.GET_TAGS,
         {
           headers: req.headers,
-          params: {
-            _page: req.query._page,
-            _limit: process.env.CHALLENGE_PAGE_LIMIT,
-          },
         }
       )
 

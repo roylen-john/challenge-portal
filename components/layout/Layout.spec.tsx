@@ -20,7 +20,7 @@ describe('Layout', () => {
   const layouts = [
     {
       component: 'Test',
-      route: routes.Home,
+      route: routes.HOME,
       expectedLayoutTestId: 'minimal-layout',
     },
     {

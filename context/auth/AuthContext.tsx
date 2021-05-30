@@ -64,7 +64,10 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
         localStorage.setItem('accessToken', token)
         const user = jwt_decode<iUser>(token)
         setUser(user)
-        router.push({ pathname: routes.ALL_CHALLENGES, query: { page: 1 } })
+        router.push({
+          pathname: routes.ALL_CHALLENGES,
+          query: { page: 1, sort: 'created_at', order: 'desc' },
+        })
       })
       .catch((err) => {
         toast(err.response.data.message, { type: 'error' })
@@ -79,7 +82,10 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
         localStorage.setItem('accessToken', token)
         const user = jwt_decode<iUser>(token)
         setUser(user)
-        router.push({ pathname: routes.ALL_CHALLENGES, query: { page: 1 } })
+        router.push({
+          pathname: routes.ALL_CHALLENGES,
+          query: { page: 1, sort: 'created_at', order: 'desc' },
+        })
       })
       .catch((err) => {
         toast(err.response.data.message, { type: 'error' })

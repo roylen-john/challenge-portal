@@ -7,9 +7,14 @@ import { swrFetcher } from '../../utils/utils'
 
 export const AllChallenges = (): ReactElement => {
   const router = useRouter()
-  const { data, error } = useSWR(
-    clientApiRoutes.GET_CHALLENGES + `?_page=${router.query.page}`,
-    swrFetcher
+  const { data, error } = useSWR(clientApiRoutes.GET_CHALLENGES, (url) =>
+    swrFetcher(url, {
+      params: {
+        _page: router.query.page,
+        _sort: router.query.sort,
+        _order: router.query.order,
+      },
+    })
   )
 
   if (error) return <div>Failed to load challenges</div>

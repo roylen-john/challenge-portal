@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 
 const classNames = (...classes: string[]): string => {
   return classes.filter(Boolean).join(' ')
@@ -24,9 +24,9 @@ const apiClient = (): AxiosInstance => {
   return instance
 }
 
-const swrFetcher = (url: string): Promise<any> =>
+const swrFetcher = (url: string, configs: AxiosRequestConfig): Promise<any> =>
   apiClient()
-    .get(url)
+    .get(url, configs)
     .then((res) => res.data)
 
 export { classNames, apiClient, swrFetcher }

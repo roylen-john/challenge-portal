@@ -53,7 +53,10 @@ export function AppLayout({ children }: iLayoutProps): ReactElement {
           navItems={[
             {
               name: 'All Challenges',
-              href: { pathname: routes.ALL_CHALLENGES, query: { page: 1 } },
+              href: {
+                pathname: routes.ALL_CHALLENGES,
+                query: { page: 1, sort: 'created_at', order: 'desc' },
+              },
             },
             { name: 'New Challenge', href: routes.NEW_CHALLENGE },
           ]}
