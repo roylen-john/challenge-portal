@@ -1,3 +1,5 @@
-export const Home = (): JSX.Element => <div>New challenge</div>
+import withAuth from '../../components/hoc/with-auth/WithAuth'
 
-export default Home
+export const NewChallenge = (): JSX.Element => <div>New challenge</div>
+
+export default withAuth(NewChallenge)

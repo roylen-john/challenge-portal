@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { classNames } from '../../utils/utils'
 import Navbar from '../navbar/Navbar'
 import { routes } from '../../utils/constants'
+import withAuth from '../hoc/with-auth/WithAuth'
 
 interface iLayoutProps {
   children: React.ReactNode
@@ -64,19 +65,21 @@ export function AppLayout({ children }: iLayoutProps): ReactElement {
   )
 }
 
+const ProtectedAppLayout = withAuth(AppLayout)
+
 export const getLayout = (
   page: React.ReactNode,
   route: string
 ): React.ReactNode => {
   switch (route) {
-    case routes.Home:
+    case routes.HOME:
       return <MinimalLayout>{page}</MinimalLayout>
 
     case routes.ALL_CHALLENGES:
-      return <AppLayout>{page}</AppLayout>
+      return <ProtectedAppLayout>{page}</ProtectedAppLayout>
 
     case routes.NEW_CHALLENGE:
-      return <AppLayout>{page}</AppLayout>
+      return <ProtectedAppLayout>{page}</ProtectedAppLayout>
 
     default:
       return <MinimalLayout>{page}</MinimalLayout>

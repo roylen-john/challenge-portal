@@ -1,5 +1,5 @@
 const routes = {
-  Home: '/',
+  HOME: '/',
   ALL_CHALLENGES: '/challenges/dashboard',
   NEW_CHALLENGE: '/challenges/new',
 }

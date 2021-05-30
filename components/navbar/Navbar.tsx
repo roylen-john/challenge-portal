@@ -5,6 +5,7 @@ import { Disclosure, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { classNames } from '../../utils/utils'
 import Logo from '../logo/Logo'
+import { useAuth } from '../../context/auth/AuthContext'
 
 interface navItem {
   name: string
@@ -18,6 +19,7 @@ export interface iNavbarProps {
 
 function Navbar({ navItems }: iNavbarProps): ReactElement {
   const router = useRouter()
+  const { user, logout } = useAuth()
 
   return (
     <Disclosure as="nav" className="bg-neutralBgSoft w-full fixed">
@@ -68,6 +70,17 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                 >
                   Theme Toggle
                 </button> */}
+                {user && (
+                  <span className="text-lg font-bold text-white mr-10">
+                    {user.name}
+                  </span>
+                )}
+                <button
+                  onClick={logout}
+                  className="bg-red-600 hover:bg-red-800 text-white px-3 py-2 rounded text-sm font-medium"
+                >
+                  Logout
+                </button>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
