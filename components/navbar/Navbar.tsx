@@ -2,11 +2,12 @@ import React, { ReactElement } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Disclosure, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { LogoutIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { classNames } from '../../utils/utils'
 import Logo from '../logo/Logo'
 import { useAuth } from '../../context/auth/AuthContext'
 import { UrlObject } from 'url'
+import Button from '../form-components/button/Button'
 
 interface navItem {
   name: string
@@ -25,7 +26,7 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
   return (
     <Disclosure
       as="nav"
-      className="bg-neutralBg fixed w-full border-b border-gray-700"
+      className="bg-neutralBg fixed w-full border-b border-gray-700 z-20"
     >
       {({ open }) => (
         <>
@@ -50,7 +51,7 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                               router.pathname === item.href ||
                                 router.pathname ===
                                   (item.href as UrlObject).pathname
-                                ? 'transition duration-200 ease-out bg-primaryBold text-white'
+                                ? 'transition duration-200 ease-out bg-primary text-white'
                                 : 'transition duration-200 ease-out text-contrastNeutralBgSoft hover:bg-primarySoft hover:text-white',
                               'px-3 py-2 rounded text-sm font-medium'
                             )}
@@ -67,7 +68,6 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                   </ul>
                 </div>
               </div>
-              {/* Add profile dropdown here */}
               <div className="absolute inset-y-0 right-0 items-center hidden sm:flex">
                 {/* Hidden button for theme change
                 <button
@@ -77,16 +77,26 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                   Theme Toggle
                 </button> */}
                 {user && (
-                  <span className="text-lg font-bold text-white mr-10">
-                    {user.name}
-                  </span>
+                  <div className="flex items-center">
+                    <div className="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-primaryBold text-xl text-white uppercase flex-shrink-0">
+                      <span>{user?.name?.charAt(0).toUpperCase()}</span>
+                    </div>
+                    <span className="hidden md:block ml-4 text-lg font-bold text-white mr-10">
+                      {user?.name}
+                    </span>
+                  </div>
                 )}
-                <button
-                  onClick={logout}
-                  className="bg-red-600 hover:bg-red-800 text-white px-3 py-2 rounded text-sm font-medium"
-                >
-                  Logout
-                </button>
+                <div className="w-40">
+                  <Button
+                    variant="danger"
+                    type="submit"
+                    icon={<LogoutIcon className="h-6 w-6 absolute" />}
+                    onClick={logout}
+                    fullWidth
+                  >
+                    Log Out
+                  </Button>
+                </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -118,7 +128,7 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                       <a
                         className={classNames(
                           router.pathname === item.href
-                            ? 'transition duration-200 ease-out bg-primaryBold text-white'
+                            ? 'transition duration-200 ease-out bg-primary text-white'
                             : 'transition duration-200 ease-out text-contrastNeutralBgSoft hover:bg-primarySoft hover:text-white',
                           'block px-3 py-2 rounded text-base font-medium'
                         )}
@@ -132,6 +142,27 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                     </Link>
                   </li>
                 ))}
+                <li className="border-t">
+                  {user && (
+                    <div className="flex items-center my-4">
+                      <div className="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-primaryBold text-xl text-white uppercase flex-shrink-0">
+                        <span>{user?.name?.charAt(0).toUpperCase()}</span>
+                      </div>
+                      <span className="ml-4 text-lg font-bold text-white mr-10">
+                        {user?.name}
+                      </span>
+                    </div>
+                  )}
+                  <Button
+                    variant="danger"
+                    type="submit"
+                    icon={<LogoutIcon className="h-6 w-6 absolute" />}
+                    onClick={logout}
+                    fullWidth
+                  >
+                    Log Out
+                  </Button>
+                </li>
               </ul>
             </Disclosure.Panel>
           </Transition>

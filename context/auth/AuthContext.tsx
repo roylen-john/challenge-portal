@@ -12,7 +12,7 @@ import { routes } from '../../utils/constants'
 import { apiClient } from '../../utils/utils'
 import jwt_decode from 'jwt-decode'
 
-interface iUser {
+export interface iUser {
   id: number
   emp_id: string
   name: string
@@ -92,10 +92,10 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
       })
   }
 
-  const logout = () => {
-    setUser(null)
+  const logout = async () => {
     localStorage.removeItem('accessToken')
-    router.push(routes.HOME)
+    await router.push(routes.HOME)
+    setUser(null)
   }
 
   const value = {

@@ -5,7 +5,7 @@ export interface iButtonProps {
   children?: React.ReactNode
   icon?: React.ReactNode
   type?: 'button' | 'submit'
-  variant?: 'primary' | 'neutral'
+  variant?: 'primary' | 'neutral' | 'danger'
   fullWidth?: boolean
   disabled?: boolean
   onClick?: () => void
@@ -23,9 +23,10 @@ const Button = ({
   return (
     <button
       className={classNames(
-        variant === 'primary'
-          ? 'bg-primary hover:bg-primaryBold text-white'
-          : 'bg-neutral hover:bg-neutralBold text-gray-700',
+        variant === 'primary' && 'bg-primary hover:bg-primaryBold text-white',
+        variant === 'neutral' &&
+          'bg-neutral hover:bg-neutralBold text-gray-700',
+        variant === 'danger' && 'bg-red-600 hover:bg-red-800 text-white',
         'relative font-bold py-2 px-4 rounded focus:ring-2 focus:ring-inset focus:ring-primaryBold disabled:bg-gray-200',
         fullWidth && 'w-full'
       )}

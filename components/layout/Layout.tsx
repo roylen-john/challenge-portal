@@ -63,7 +63,7 @@ export function AppLayout({ children }: iLayoutProps): ReactElement {
           onThemeChange={handleThemeChange}
         />
         <div className="h-16" />
-        <div className="h-full flex-grow px-10 py-4">{children}</div>
+        <div className="h-full flex-grow px-2 md:px-10 py-2">{children}</div>
       </div>
     </>
   )
