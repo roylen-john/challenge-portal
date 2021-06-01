@@ -127,7 +127,9 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                     <Link href={item.href}>
                       <a
                         className={classNames(
-                          router.pathname === item.href
+                          router.pathname === item.href ||
+                            router.pathname ===
+                              (item.href as UrlObject).pathname
                             ? 'transition duration-200 ease-out bg-primary text-white'
                             : 'transition duration-200 ease-out text-contrastNeutralBgSoft hover:bg-primarySoft hover:text-white',
                           'block px-3 py-2 rounded text-base font-medium'
@@ -142,7 +144,7 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                     </Link>
                   </li>
                 ))}
-                <li className="border-t">
+                <li className="border-t border-gray-700">
                   {user && (
                     <div className="flex items-center my-4">
                       <div className="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-primaryBold text-xl text-white uppercase flex-shrink-0">

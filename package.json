@@ -5,8 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "prepare": "husky install",
-    "dev": "next dev",
-    "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
@@ -29,6 +28,7 @@
     "@tailwindcss/line-clamp": "^0.2.1",
     "@tailwindcss/typography": "^0.4.1",
     "axios": "^0.21.1",
+    "cookie-cutter": "^0.2.0",
     "jwt-decode": "^3.1.2",
     "next": "latest",
     "react": "^17.0.1",

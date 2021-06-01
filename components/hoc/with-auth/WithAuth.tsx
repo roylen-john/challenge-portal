@@ -9,7 +9,7 @@ interface iWithAuthProps {
 }
 
 const withAuth = <P extends iWithAuthProps>(
-  WrappedComponent: ComponentType<P>
+  WrappedComponent: ComponentType<any>
 ): ComponentType<P> => {
   return (
     props: Pick<P, Exclude<keyof P, keyof iWithAuthProps>>

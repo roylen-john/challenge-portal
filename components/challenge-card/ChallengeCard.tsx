@@ -1,22 +1,20 @@
 import Link from 'next/link'
 import React, { ReactElement } from 'react'
+import { iChallenge } from '../../models/challenge'
 
-interface iChallengeCardProps {
-  date?: string
-  title?: string
-  tags?: string[]
+interface iChallengeCardProps extends Partial<iChallenge> {
   tagLimit?: number
-  description?: string
-  votes?: number
+  href?: string
 }
 
 const ChallengeCard = ({
-  date,
+  created_at,
   title,
   tags,
   tagLimit = 2,
   description,
   votes,
+  href,
 }: iChallengeCardProps): ReactElement => {
   return (
     <div className="bg-white border-2 border-gray-300 p-5 rounded-md tracking-wide shadow-lg flex flex-col">
@@ -26,7 +24,7 @@ const ChallengeCard = ({
             {title}
           </h4>
           <h5 id="date" className="text-sm font-semibold text-neutralBgSofter">
-            {new Date(date).toLocaleString()}
+            {new Date(created_at).toLocaleString()}
           </h5>
           <h5 id="tags" className="flex items-center mt-2 text-xs">
             {tags.slice(0, tagLimit).map((tag, index) => {
@@ -35,7 +33,7 @@ const ChallengeCard = ({
                   className="mr-4 inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full"
                   key={index}
                 >
-                  {tag}
+                  {tag.name}
                 </div>
               )
             })}
@@ -53,7 +51,7 @@ const ChallengeCard = ({
         <div className="text-gray-600 line-clamp-2">{description}</div>
       </div>
       <div className="my-auto mb-4" />
-      <Link href="#">
+      <Link href={href}>
         <a
           className="bg-primary text-white transition duration-200 ease-out text-contrastNeutralBgSoft hover:bg-primaryBold px-3 py-2 rounded text-sm font-medium text-center"
           role="link"

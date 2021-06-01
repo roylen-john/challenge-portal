@@ -79,14 +79,7 @@ export const getLayout = (
     case routes.HOME:
       return <MinimalLayout>{page}</MinimalLayout>
 
-    case routes.ALL_CHALLENGES:
-      return <ProtectedAppLayout>{page}</ProtectedAppLayout>
-
-    case routes.NEW_CHALLENGE:
-      return <ProtectedAppLayout>{page}</ProtectedAppLayout>
-
     default:
-      return <MinimalLayout>{page}</MinimalLayout>
-      break
+      return <ProtectedAppLayout>{page}</ProtectedAppLayout>
   }
 }

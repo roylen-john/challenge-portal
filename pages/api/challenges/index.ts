@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { serverApiRoutes as apiRoutes } from '../../utils/apiUtils'
+import { serverApiRoutes as apiRoutes } from '../../../utils/apiUtils'
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,6 +41,7 @@ export default async function handler(
         temp.created_by = users_response.data.find(
           (user) => (user.id = temp.created_by)
         )
+        delete temp.created_by.password
         temp.tags = temp.tags.map((tagid) =>
           tags_response.data.find((tag) => tag.id === tagid)
         )
@@ -48,7 +49,7 @@ export default async function handler(
       })
 
       return res.status(200).json({
-        data: response,
+        challenges: response,
         records: {
           total_records: challenge_response.headers['x-total-count'],
           total_pages: Math.ceil(

@@ -4,7 +4,7 @@ import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 // interface iProps {}
 
 class Document extends NextDocument {
-  render(): JSX.Element {
+  render(): React.ReactElement {
     return (
       <Html lang="en">
         <Head>

@@ -4,7 +4,7 @@ const classNames = (...classes: string[]): string => {
   return classes.filter(Boolean).join(' ')
 }
 
-const apiClient = (): AxiosInstance => {
+const apiClient = (cookieToken = null): AxiosInstance => {
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ const apiClient = (): AxiosInstance => {
 
   // Set the AUTH token for any request
   instance.interceptors.request.use(function (config) {
-    const token = localStorage.getItem('accessToken')
+    const token = cookieToken || localStorage.getItem('accessToken')
     config.headers.Authorization = token ? `Bearer ${token}` : ''
     return config
   })

@@ -11,12 +11,8 @@ import { clientApiRoutes } from '../../utils/apiUtils'
 import { routes } from '../../utils/constants'
 import { apiClient } from '../../utils/utils'
 import jwt_decode from 'jwt-decode'
-
-export interface iUser {
-  id: number
-  emp_id: string
-  name: string
-}
+import { iUser } from '../../models/user'
+import cookieCutter from 'cookie-cutter'
 
 interface iAuthContext {
   user: iUser
@@ -59,12 +55,13 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
   const login = async (user) => {
     return await apiClient()
       .post(clientApiRoutes.LOGIN, user)
-      .then((response) => {
+      .then(async (response) => {
         const token = response.data.access_token
         localStorage.setItem('accessToken', token)
+        cookieCutter.set('accessToken', token)
         const user = jwt_decode<iUser>(token)
         setUser(user)
-        router.push({
+        await router.push({
           pathname: routes.ALL_CHALLENGES,
           query: { page: 1, sort: 'created_at', order: 'desc' },
         })
@@ -77,12 +74,12 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
   const register = async (user) => {
     return await apiClient()
       .post(clientApiRoutes.REGISTER, user)
-      .then((response) => {
+      .then(async (response) => {
         const token = response.data.access_token
         localStorage.setItem('accessToken', token)
         const user = jwt_decode<iUser>(token)
         setUser(user)
-        router.push({
+        await router.push({
           pathname: routes.ALL_CHALLENGES,
           query: { page: 1, sort: 'created_at', order: 'desc' },
         })
