@@ -10,7 +10,7 @@ export default async function handler(
     try {
       // Hacky way of forming relations because json-server does not support relations
       const challenge_response = await axios.get(
-        process.env.HOST + apiRoutes.GET_CHALLENGES,
+        process.env.HOST + apiRoutes.CHALLENGES,
         {
           headers: req.headers,
           params: {
@@ -63,6 +63,24 @@ export default async function handler(
       res.json(error.response?.data || error)
       res.status(error.response?.status || 405).end()
     }
+  } else if (req.method === 'POST') {
+    const { title, description, tags } = req.body
+    const user = JSON.parse(req.cookies.user)
+    await axios
+      .post(
+        process.env.HOST + apiRoutes.CHALLENGES,
+        {
+          title,
+          description,
+          tags: tags.map((tag) => tag.id),
+          votes: [],
+          created_by: user.id,
+          created_at: new Date().toISOString(),
+        },
+        { headers: req.headers }
+      )
+      .then((response) => res.status(200).json(response.data))
+      .catch((err) => res.status(err.response.status).json(err.response.data))
   } else {
     res.status(404).end()
   }

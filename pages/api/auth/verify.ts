@@ -7,17 +7,12 @@ export default async function handler(
   res: NextApiResponse
 ): Promise<void> {
   if (req.method === 'POST') {
-    try {
-      await axios
-        .post(process.env.HOST + apiRoutes.VERIFY, null, {
-          headers: req.headers,
-        })
-        .then((response) => res.status(200).json(response.data))
-        .catch((err) => res.status(err.response.status).json(err.response.data))
-    } catch (error) {
-      res.json(error)
-      res.status(405).end()
-    }
+    await axios
+      .post(process.env.HOST + apiRoutes.VERIFY, null, {
+        headers: req.headers,
+      })
+      .then((response) => res.status(200).json(response.data))
+      .catch((err) => res.status(err.response.status).json(err.response.data))
   } else {
     res.status(404).end()
   }

@@ -14,7 +14,7 @@ export default async function handler(
       const { id } = req.query
       // Hacky way of forming relations because json-server does not support relations
       const challenge_response = await axios.get(
-        process.env.HOST + apiRoutes.GET_CHALLENGES + `/${id}`,
+        process.env.HOST + apiRoutes.CHALLENGES + `/${id}`,
         {
           headers: req.headers,
         }
@@ -45,7 +45,6 @@ export default async function handler(
 
       return res.status(200).json(response)
     } catch (error) {
-      res.json(error.response?.data || error)
       res.status(error.response?.status || 405).end()
     }
   } else if (req.method === 'PATCH') {
@@ -57,7 +56,7 @@ export default async function handler(
     try {
       // Hacky way of forming relations because json-server does not support relations
       const challenge_response = await axios.get(
-        process.env.HOST + apiRoutes.GET_CHALLENGES + `/${id}`,
+        process.env.HOST + apiRoutes.CHALLENGES + `/${id}`,
         {
           headers: req.headers,
         }
@@ -68,7 +67,7 @@ export default async function handler(
           return res.status(304).end()
         }
         vote_response = await axios.patch(
-          process.env.HOST + apiRoutes.GET_CHALLENGES + `/${id}`,
+          process.env.HOST + apiRoutes.CHALLENGES + `/${id}`,
           {
             votes: [...challenge_response.data.votes, user.id],
           },
@@ -81,7 +80,7 @@ export default async function handler(
           return res.status(304).end()
         }
         vote_response = await axios.patch(
-          process.env.HOST + apiRoutes.GET_CHALLENGES + `/${id}`,
+          process.env.HOST + apiRoutes.CHALLENGES + `/${id}`,
           {
             votes: challenge_response.data.votes.filter((id) => id !== user.id),
           },

@@ -8,23 +8,18 @@ export default async function handler(
 ): Promise<void> {
   if (req.method === 'POST') {
     const { emp_id, password, name } = req.body
-    try {
-      await axios
-        .post(
-          process.env.HOST + apiRoutes.REGISTER,
-          {
-            name,
-            emp_id,
-            password,
-          },
-          { headers: req.headers }
-        )
-        .then((response) => res.status(200).json(response.data))
-        .catch((err) => res.status(err.response.status).json(err.response.data))
-    } catch (error) {
-      res.json(error)
-      res.status(405).end()
-    }
+    await axios
+      .post(
+        process.env.HOST + apiRoutes.REGISTER,
+        {
+          name,
+          emp_id,
+          password,
+        },
+        { headers: req.headers }
+      )
+      .then((response) => res.status(200).json(response.data))
+      .catch((err) => res.status(err.response.status).json(err.response.data))
   } else {
     res.status(404).end()
   }

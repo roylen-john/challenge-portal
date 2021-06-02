@@ -34,20 +34,20 @@ export const AllChallenges = (): ReactElement => {
 
   useEffect(() => {
     if (!router.query.page || !router.query.sort || !router.query.order) {
-      const newRouter = router
-      router.query = {
-        page: '1',
-        sort: 'created_at',
-        order: 'desc',
-        ...router.query,
-      }
-      router.replace(newRouter)
+      router.replace({
+        query: {
+          page: '1',
+          sort: 'created_at',
+          order: 'desc',
+          ...router.query,
+        },
+      })
     }
   }, [])
 
   const { data, error } = useSWR(
     [
-      clientApiRoutes.GET_CHALLENGES,
+      clientApiRoutes.CHALLENGES,
       router.query.page,
       router.query.sort,
       router.query.order,
@@ -121,9 +121,10 @@ export const AllChallenges = (): ReactElement => {
         </div>
       </div>
       <div className="h-16" />
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-flow-row gap-4">
-        {data && data.challenges ? (
-          data.challenges.map((challenge: iChallenge) => {
+
+      {data && data.challenges ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-flow-row gap-4">
+          {data.challenges.map((challenge: iChallenge) => {
             return (
               <ChallengeCard
                 created_at={challenge.created_at}
@@ -135,14 +136,15 @@ export const AllChallenges = (): ReactElement => {
                 href={routes.ALL_CHALLENGES + `/${challenge.id}`}
               />
             )
-          })
-        ) : (
-          <div className="flex w-full h-60 justify-center m-auto items-center text-lg text-contrastNeutralBg">
-            <DotsCircleHorizontalIcon className="h-6 w-6 mr-5" />
-            Loading...
-          </div>
-        )}
-      </div>
+          })}
+        </div>
+      ) : (
+        <div className="flex w-full h-60 justify-center m-auto items-center text-lg text-contrastNeutralBg">
+          <DotsCircleHorizontalIcon className="h-6 w-6 mr-5" />
+          Loading...
+        </div>
+      )}
+
       <div className="mt-4">
         {data && data.records?.total_pages > 1 && (
           <Paginator

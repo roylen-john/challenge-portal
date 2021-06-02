@@ -6,17 +6,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  if (req.method === 'POST') {
-    const { emp_id, password } = req.body
+  if (req.method === 'GET') {
     await axios
-      .post(
-        process.env.HOST + apiRoutes.LOGIN,
-        {
-          emp_id,
-          password,
-        },
-        { headers: req.headers }
-      )
+      .get(process.env.HOST + apiRoutes.GET_TAGS, { headers: req.headers })
       .then((response) => res.status(200).json(response.data))
       .catch((err) => res.status(err.response.status).json(err.response.data))
   } else {

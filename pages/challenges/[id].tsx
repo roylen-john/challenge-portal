@@ -23,13 +23,13 @@ export const GetChallenge = (): ReactElement => {
     error,
     mutate,
   }: { data?: iChallenge; error?: any; mutate: any } = useSWR(
-    [clientApiRoutes.GET_CHALLENGES + `/${router.query.id}`],
+    clientApiRoutes.CHALLENGES + `/${router.query.id}`,
     swrFetcher
   )
 
   const handleUpvote = async () => {
     await apiClient()
-      .patch(clientApiRoutes.GET_CHALLENGES + `/${router.query.id}`, null, {
+      .patch(clientApiRoutes.CHALLENGES + `/${router.query.id}`, null, {
         params: {
           action: voteActions.UPVOTE,
         },
@@ -39,13 +39,15 @@ export const GetChallenge = (): ReactElement => {
         mutate()
       })
       .catch(() => {
-        toast('There was an error performing that action.', { type: 'error' })
+        toast('There was an error wjile performing that action.', {
+          type: 'error',
+        })
       })
   }
 
   const handleDownvote = async () => {
     await apiClient()
-      .patch(clientApiRoutes.GET_CHALLENGES + `/${router.query.id}`, null, {
+      .patch(clientApiRoutes.CHALLENGES + `/${router.query.id}`, null, {
         params: {
           action: voteActions.DOWNVOTE,
         },
@@ -55,7 +57,9 @@ export const GetChallenge = (): ReactElement => {
         mutate()
       })
       .catch(() => {
-        toast('There was an error performing that action.', { type: 'error' })
+        toast('There was an error wjile performing that action.', {
+          type: 'error',
+        })
       })
   }
 
