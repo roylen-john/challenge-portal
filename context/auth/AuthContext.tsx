@@ -11,7 +11,7 @@ import { clientApiRoutes } from '../../utils/apiUtils'
 import { routes } from '../../utils/constants'
 import { apiClient } from '../../utils/utils'
 import jwt_decode from 'jwt-decode'
-import { iUser } from '../../models/user'
+import { iUser } from '../../models/user.model'
 import cookieCutter from 'cookie-cutter'
 
 interface iAuthContext {

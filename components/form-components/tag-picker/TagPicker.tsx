@@ -1,7 +1,7 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon, XCircleIcon } from '@heroicons/react/solid'
 import React, { Fragment, useState } from 'react'
-import { iTag } from '../../../models/tag'
+import { iTag } from '../../../models/tag.model'
 import { classNames } from '../../../utils/utils'
 
 export interface iTagPickerProps {

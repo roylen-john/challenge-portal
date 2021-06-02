@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React, { ReactElement } from 'react'
-import { iChallenge } from '../../models/challenge'
+import { iChallenge } from '../../models/challenge.model'
 
 interface iChallengeCardProps extends Partial<iChallenge> {
   tagLimit?: number

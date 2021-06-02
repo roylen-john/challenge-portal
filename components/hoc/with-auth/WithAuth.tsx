@@ -1,7 +1,7 @@
 import React, { ComponentType, ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { verifyToken } from '../../../services/verifyToken'
+import { verifyToken } from '../../../services/verifyToken.service'
 import { toast } from 'react-toastify'
 
 interface iWithAuthProps {

@@ -20,4 +20,10 @@ const voteActions = {
   DOWNVOTE: 'downvote',
 }
 
-export { serverApiRoutes, clientApiRoutes, voteActions }
+const requestMethods = {
+  GET: 'GET',
+  POST: 'POST',
+  PATCH: 'PATCH',
+}
+
+export { serverApiRoutes, clientApiRoutes, voteActions, requestMethods }

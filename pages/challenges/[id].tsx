@@ -11,7 +11,7 @@ import useSWR from 'swr'
 import Button from '../../components/form-components/button/Button'
 import withAuth from '../../components/hoc/with-auth/WithAuth'
 import { useAuth } from '../../context/auth/AuthContext'
-import { iChallenge } from '../../models/challenge'
+import { iChallenge } from '../../models/challenge.model'
 import { clientApiRoutes, voteActions } from '../../utils/apiUtils'
 import { apiClient, swrFetcher } from '../../utils/utils'
 

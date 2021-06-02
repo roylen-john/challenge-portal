@@ -1,5 +1,5 @@
-import { iTag } from './tag'
-import { iUser } from './user'
+import { iTag } from './tag.model'
+import { iUser } from './user.model'
 
 export interface iChallenge {
   id: number
