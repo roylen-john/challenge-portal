@@ -53,7 +53,7 @@ const ChallengeCard = ({
       <div className="my-auto mb-4" />
       <Link href={href}>
         <a
-          className="bg-primary text-white transition duration-200 ease-out text-contrastNeutralBgSoft hover:bg-primaryBold px-3 py-2 rounded text-sm font-medium text-center"
+          className="bg-primary text-white transition duration-200 ease-out text-contrastNeutralBgSoft hover:bg-primaryBold px-3 py-2 rounded text-sm font-medium text-center focus:outline-none focus:ring focus:border-primaryBold"
           role="link"
         >
           More Details

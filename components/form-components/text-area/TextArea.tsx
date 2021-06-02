@@ -1,11 +1,11 @@
 import React from 'react'
 import { classNames } from '../../../utils/utils'
 
-export interface iTextFieldProps {
+export interface iTextAreaProps {
   name: string
-  type: 'text' | 'email' | 'number' | 'password'
   label?: string
   placeholder?: string
+  rows?: number
   error?: boolean
   helperText?: string
   fullWidth?: boolean
@@ -14,13 +14,13 @@ export interface iTextFieldProps {
   onBlur: () => void
 }
 
-const TextField = React.forwardRef<HTMLInputElement, iTextFieldProps>(
+const TextArea = React.forwardRef<HTMLTextAreaElement, iTextAreaProps>(
   (
     {
       name,
-      type,
       label,
       placeholder,
+      rows = 10,
       error = false,
       helperText,
       fullWidth,
@@ -40,19 +40,19 @@ const TextField = React.forwardRef<HTMLInputElement, iTextFieldProps>(
             {label}
           </label>
         )}
-        <input
+        <textarea
           className={classNames(
             'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-primaryBold',
             error ? 'border-red-500' : ''
           )}
           id={name}
           name={name}
-          type={type}
           placeholder={placeholder}
           onChange={onChange}
           onBlur={onBlur}
           value={value}
           ref={ref}
+          rows={rows}
           role="textbox"
         />
         {helperText && (
@@ -70,4 +70,4 @@ const TextField = React.forwardRef<HTMLInputElement, iTextFieldProps>(
   }
 )
 
-export default TextField
+export default TextArea

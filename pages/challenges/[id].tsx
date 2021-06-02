@@ -79,7 +79,7 @@ export const GetChallenge = (): ReactElement => {
     <div>
       <div className="px-2 sm:px-11 fixed top-16 left-0 flex flex-row items-center w-full bg-neutralBg h-16 z-10">
         <button
-          className="text-white flex items-center"
+          className="text-white pr-2 flex items-center focus:outline-none focus:ring focus:border-primaryBold"
           onClick={() => router.back()}
         >
           <ArrowCircleLeftIcon className="h-8 w-8 mr-2" /> <span>Back</span>

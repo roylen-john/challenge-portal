@@ -27,7 +27,7 @@ const Button = ({
         variant === 'neutral' &&
           'bg-neutral hover:bg-neutralBold text-gray-700',
         variant === 'danger' && 'bg-red-600 hover:bg-red-800 text-white',
-        'relative font-bold py-2 px-4 rounded focus:ring-2 focus:ring-inset focus:ring-primaryBold disabled:bg-gray-200',
+        'relative font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:border-primaryBold disabled:bg-gray-200',
         fullWidth && 'w-full'
       )}
       type={type}

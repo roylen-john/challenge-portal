@@ -63,13 +63,13 @@ export const AllChallenges = (): ReactElement => {
   )
 
   const handleSortChange = (value) => {
-    const newRouter = router
-    router.query = {
-      ...router.query,
-      sort: value.sortValue,
-      order: value.orderValue,
-    }
-    router.push(newRouter)
+    router.push({
+      query: {
+        ...router.query,
+        sort: value.sortValue,
+        order: value.orderValue,
+      },
+    })
     setSort(value)
   }
 
