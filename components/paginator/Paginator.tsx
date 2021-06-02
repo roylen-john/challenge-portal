@@ -21,16 +21,19 @@ const Paginator = ({
           Page
         </label>
       </li>
-      <li
-        className={classNames(
-          'relative block py-2 px-3 leading-tight bg-white border border-gray-300 border-r ml-0 rounded-l w-24',
-          current > 1 &&
-            'hover:bg-primary hover:text-white hover:border-primary',
-          current > 1 ? 'text-black' : 'text-gray-300'
-        )}
-        onClick={onPrevious}
-      >
-        Previous
+      <li>
+        <button
+          className={classNames(
+            'relative block py-2 px-3 leading-tight bg-white border border-gray-300 border-r ml-0 rounded-l w-24 text-left focus:outline-none focus:ring focus:border-primaryBold z-10',
+            current > 1 &&
+              'hover:bg-primary hover:text-white hover:border-primary',
+            current > 1 ? 'text-black' : 'text-gray-300'
+          )}
+          onClick={onPrevious}
+          disabled={current <= 1}
+        >
+          Previous
+        </button>
       </li>
       <li
         className={classNames(
@@ -39,16 +42,19 @@ const Paginator = ({
       >
         {current}
       </li>
-      <li
-        className={classNames(
-          'relative block py-2 px-3 leading-tight bg-white border border-gray-300 border-l rounded-r w-24 text-right',
-          current < total &&
-            'hover:bg-primary hover:text-white hover:border-primary',
-          current < total ? 'text-black' : 'text-gray-300'
-        )}
-        onClick={onNext}
-      >
-        Next
+      <li>
+        <button
+          className={classNames(
+            'relative block py-2 px-3 leading-tight bg-white border border-gray-300 border-l rounded-r w-24 text-right focus:outline-none focus:ring focus:border-primaryBold z-10',
+            current < total &&
+              'hover:bg-primary hover:text-white hover:border-primary',
+            current < total ? 'text-black' : 'text-gray-300'
+          )}
+          onClick={onNext}
+          disabled={current >= total}
+        >
+          Next
+        </button>
       </li>
     </ul>
   )
