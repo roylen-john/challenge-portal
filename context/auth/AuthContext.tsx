@@ -92,6 +92,11 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
 
   const logout = async () => {
     localStorage.removeItem('accessToken')
+    document.cookie.split(';').forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/')
+    })
     await router.push(routes.HOME)
     setUser(null)
   }
