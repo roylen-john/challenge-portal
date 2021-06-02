@@ -4,7 +4,19 @@
       "id": 1,
       "emp_id": "101010",
       "password": "1qwertyui",
-      "name": "Test User 1"
+      "name": "Jon Doe"
+    },
+    {
+      "id": 2,
+      "emp_id": "101011",
+      "password": "1qwertyui",
+      "name": "Kristy Flintoffe"
+    },
+    {
+      "id": 3,
+      "emp_id": "101012",
+      "password": "1qwertyui",
+      "name": "Aviva Janaway"
     }
   ]
 }

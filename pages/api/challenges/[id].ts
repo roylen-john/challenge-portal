@@ -31,9 +31,9 @@ export default async function handler(
         }
       )
 
-      const response = challenge_response.data
+      const response = { ...challenge_response.data }
       response.created_by = users_response.data.find(
-        (user) => (user.id = response.created_by)
+        (user) => user.id === response.created_by
       )
       response.tags = response.tags.map((tagid) =>
         tags_response.data.find((tag) => tag.id === tagid)

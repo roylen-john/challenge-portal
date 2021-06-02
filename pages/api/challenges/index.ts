@@ -39,7 +39,7 @@ export default async function handler(
       const response = challenge_response.data.map((challenge) => {
         const temp = challenge
         temp.created_by = users_response.data.find(
-          (user) => (user.id = temp.created_by)
+          (user) => user.id === temp.created_by
         )
         delete temp.created_by.password
         temp.tags = temp.tags.map((tagid) =>

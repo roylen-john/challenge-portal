@@ -81,7 +81,7 @@ export const GetChallenge = (): ReactElement => {
           })}
         </h5>
         <div>
-          <div className="my-4">{data.description}</div>
+          <div className="my-4 whitespace-pre-wrap">{data.description}</div>
           <div className="border-t-2"></div>
 
           <div className="flex justify-between md:justify-end items-center my-4">
