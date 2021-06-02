@@ -60,6 +60,7 @@ export function AuthProvider({ children }: iAuthProviderProps): ReactElement {
         localStorage.setItem('accessToken', token)
         cookieCutter.set('accessToken', token)
         const user = jwt_decode<iUser>(token)
+        cookieCutter.set('user', JSON.stringify(user))
         setUser(user)
         await router.push({
           pathname: routes.ALL_CHALLENGES,

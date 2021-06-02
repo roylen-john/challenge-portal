@@ -10,6 +10,7 @@ import ChallengeCard from '../../components/challenge-card/ChallengeCard'
 import Dropdown from '../../components/form-components/dropdown/Dropdown'
 import withAuth from '../../components/hoc/with-auth/WithAuth'
 import Paginator from '../../components/paginator/Paginator'
+import { iChallenge } from '../../models/challenge'
 import { clientApiRoutes } from '../../utils/apiUtils'
 import { routes } from '../../utils/constants'
 import { swrFetcher } from '../../utils/utils'
@@ -122,7 +123,7 @@ export const AllChallenges = (): ReactElement => {
       <div className="h-16" />
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-flow-row gap-4">
         {data && data.challenges ? (
-          data.challenges.map((challenge) => {
+          data.challenges.map((challenge: iChallenge) => {
             return (
               <ChallengeCard
                 created_at={challenge.created_at}

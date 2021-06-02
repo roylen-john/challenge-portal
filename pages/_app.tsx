@@ -14,11 +14,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactFragment {
     <AuthProvider>
       {getLayout(<Component {...pageProps} />, router.pathname)}
       <ToastContainer
-        position={
-          typeof window !== 'undefined' && window.innerWidth < 800
-            ? 'bottom-center'
-            : 'top-right'
-        }
+        position="bottom-center"
         autoClose={5000}
         closeOnClick
         pauseOnHover

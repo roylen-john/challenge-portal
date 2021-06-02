@@ -6,7 +6,7 @@ export interface iChallenge {
   title: string
   description: string
   tags: iTag[]
-  votes: number
+  votes: number[]
   created_at: string
   created_by: iUser
 }

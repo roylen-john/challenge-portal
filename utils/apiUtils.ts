@@ -14,4 +14,9 @@ const clientApiRoutes = {
   GET_CHALLENGES: '/api/challenges',
 }
 
-export { serverApiRoutes, clientApiRoutes }
+const voteActions = {
+  UPVOTE: 'upvote',
+  DOWNVOTE: 'downvote',
+}
+
+export { serverApiRoutes, clientApiRoutes, voteActions }

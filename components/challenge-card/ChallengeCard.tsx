@@ -44,7 +44,7 @@ const ChallengeCard = ({
         </div>
         <div className="ml-auto m-1 p-8 w-12 h-12 relative flex flex-col justify-center items-center bg-primary text-xl text-white uppercase flex-shrink-0">
           <div className="text-xs">Votes</div>
-          <span>{votes}</span>
+          <span>{votes.length}</span>
         </div>
       </div>
       <div id="description">

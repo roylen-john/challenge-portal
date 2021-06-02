@@ -16,7 +16,8 @@ export default async function handler(
           params: {
             _page: req.query._page,
             _limit: process.env.CHALLENGE_PAGE_LIMIT,
-            _sort: req.query._sort,
+            _sort:
+              req.query._sort === 'votes' ? 'votes.length' : req.query._sort, // votes.length allows querying the length of the array
             _order: req.query._order,
           },
         }

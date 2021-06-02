@@ -6,18 +6,58 @@ import {
 } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import { ReactElement } from 'react'
+import { toast } from 'react-toastify'
 import useSWR from 'swr'
 import Button from '../../components/form-components/button/Button'
 import withAuth from '../../components/hoc/with-auth/WithAuth'
-import { clientApiRoutes } from '../../utils/apiUtils'
-import { swrFetcher } from '../../utils/utils'
+import { useAuth } from '../../context/auth/AuthContext'
+import { iChallenge } from '../../models/challenge'
+import { clientApiRoutes, voteActions } from '../../utils/apiUtils'
+import { apiClient, swrFetcher } from '../../utils/utils'
 
 export const GetChallenge = (): ReactElement => {
+  const { user } = useAuth()
   const router = useRouter()
-  const { data, error } = useSWR(
+  const {
+    data,
+    error,
+    mutate,
+  }: { data?: iChallenge; error?: any; mutate: any } = useSWR(
     [clientApiRoutes.GET_CHALLENGES + `/${router.query.id}`],
     swrFetcher
   )
+
+  const handleUpvote = async () => {
+    await apiClient()
+      .patch(clientApiRoutes.GET_CHALLENGES + `/${router.query.id}`, null, {
+        params: {
+          action: voteActions.UPVOTE,
+        },
+      })
+      .then(async () => {
+        toast('👍🏻 Challenge was upvoted!', { type: 'success' })
+        mutate()
+      })
+      .catch(() => {
+        toast('There was an error performing that action.', { type: 'error' })
+      })
+  }
+
+  const handleDownvote = async () => {
+    await apiClient()
+      .patch(clientApiRoutes.GET_CHALLENGES + `/${router.query.id}`, null, {
+        params: {
+          action: voteActions.DOWNVOTE,
+        },
+      })
+      .then(async () => {
+        toast('👎🏻 Challenge was downvoted!', { type: 'success' })
+        mutate()
+      })
+      .catch(() => {
+        toast('There was an error performing that action.', { type: 'error' })
+      })
+  }
 
   if (error)
     return (
@@ -46,7 +86,7 @@ export const GetChallenge = (): ReactElement => {
         </button>
       </div>
       <div className="h-16" />
-      <div className="bg-white py-6 px-6 rounded-3xl w-full shadow-lg">
+      <div className="bg-white py-6 px-6 rounded-md w-full shadow-lg">
         <div className="flex items-center">
           <div className="m-1 mr-2 w-16 h-16 flex justify-center items-center rounded-full bg-primary text-xl text-white uppercase flex-shrink-0">
             {data.created_by.name.charAt(0)}
@@ -65,7 +105,7 @@ export const GetChallenge = (): ReactElement => {
           </div>
           <div className="hidden ml-auto m-1 p-8 w-12 h-12 relative md:flex flex-col justify-center items-center bg-primary text-xl text-white uppercase flex-shrink-0">
             <div className="text-xs">Votes</div>
-            <span>{data.votes}</span>
+            <span>{data.votes.length}</span>
           </div>
         </div>
         <h5 id="tags" className="flex items-center mt-2 text-xs">
@@ -87,16 +127,26 @@ export const GetChallenge = (): ReactElement => {
           <div className="flex justify-between md:justify-end items-center my-4">
             <div className="md:hidden m-1 p-8 w-24 h-24 relative flex flex-col justify-center items-center bg-primary text-xl text-white uppercase flex-shrink-0">
               <div className="text-xs">Votes</div>
-              <span>{data.votes}</span>
+              <span>{data.votes.length}</span>
             </div>
             <div className="flex flex-col md:flex-row">
               <div className="m-2">
-                <Button variant="primary" fullWidth>
+                <Button
+                  variant="primary"
+                  onClick={handleUpvote}
+                  fullWidth
+                  disabled={data.votes.includes(user.id)}
+                >
                   Upvote
                 </Button>
               </div>
               <div className="m-2">
-                <Button variant="danger" fullWidth>
+                <Button
+                  variant="danger"
+                  onClick={handleDownvote}
+                  fullWidth
+                  disabled={!data.votes.includes(user.id)}
+                >
                   Downvote
                 </Button>
               </div>
