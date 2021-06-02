@@ -166,6 +166,7 @@ function Navbar({ navItems }: iNavbarProps): ReactElement {
                   </Button>
                 </li>
               </ul>
+              <div className="fixed h-screen w-screen bg-black opacity-40" />
             </Disclosure.Panel>
           </Transition>
         </>
