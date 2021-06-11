@@ -1,5 +1,4 @@
-# Hack Ideas
-
+# Challenge Portal
 A web application which lets employees of an organisation to add/manage challenges for internal hackathons which they organise every month.
 
 Features
