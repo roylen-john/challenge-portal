@@ -30,7 +30,7 @@ class Document extends NextDocument {
           <meta name="apple-mobile-web-app-status-bar" content="#51fbf9" />
           <meta
             name="description"
-            content="Hack ideas is a platform for developers to post their programming challenges and the challengers to view and vote."
+            content="Challenge portal is a platform for developers to post their programming challenges and the challengers to view and vote them."
           ></meta>
         </Head>
         <body>

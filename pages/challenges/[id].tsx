@@ -1,3 +1,4 @@
+import { UserCircleIcon } from '@heroicons/react/outline'
 import {
   ArrowCircleLeftIcon,
   CalendarIcon,
@@ -99,6 +100,17 @@ export const GetChallenge = (): ReactElement => {
             <h4 id="name" className="text-xl font-bold">
               {data.title}
             </h4>
+            <h6
+              id="name"
+              className="text-md font-mono text-neutralBgSofter flex items-center"
+            >
+              <UserCircleIcon className="w-4 h-4 text-gray-400 mr-2" />
+              {data.created_by.id === user.id ? (
+                <span className="font-semibold text-primary">You</span>
+              ) : (
+                <span>{data.created_by.name}</span>
+              )}
+            </h6>
             <h5
               id="date"
               className="text-sm font-semibold text-neutralBgSofter flex items-center"
@@ -139,7 +151,10 @@ export const GetChallenge = (): ReactElement => {
                   variant="primary"
                   onClick={handleUpvote}
                   fullWidth
-                  disabled={data.votes.includes(user.id)}
+                  disabled={
+                    data.votes.includes(user.id) ||
+                    data.created_by.id === user.id
+                  }
                 >
                   Upvote
                 </Button>
@@ -149,7 +164,10 @@ export const GetChallenge = (): ReactElement => {
                   variant="danger"
                   onClick={handleDownvote}
                   fullWidth
-                  disabled={!data.votes.includes(user.id)}
+                  disabled={
+                    !data.votes.includes(user.id) ||
+                    data.created_by.id === user.id
+                  }
                 >
                   Downvote
                 </Button>

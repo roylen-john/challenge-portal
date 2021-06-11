@@ -1,7 +1,6 @@
 {
-  "name": "hack-ideas",
+  "name": "challenge-portal",
   "author": "Roylen",
-  "license": "MIT",
   "version": "1.0.0",
   "scripts": {
     "prepare": "husky install",
